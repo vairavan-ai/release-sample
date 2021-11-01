@@ -1,0 +1,21 @@
+{
+  "name": "Prices",
+  "version": "1.0.0",
+  "description": "Prices of commodities",
+  "repository": "electron/simple-samples",
+  "main": "app.js",
+  "scripts": {
+    "start": "electron app.js",
+    "postinstall": "electron-builder install-app-deps",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder -mwl"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^3.0.2",
+    "electron-builder": "^22.13.1"
+  },
+  "dependencies": {
+    "papaparse": "^4.6.0"
+  }
+}
