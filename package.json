@@ -8,7 +8,7 @@
     "start": "electron app.js",
     "postinstall": "electron-builder install-app-deps",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder -mwl"
+    "dist": "electron-builder"
   },
   "license": "ISC",
   "devDependencies": {
