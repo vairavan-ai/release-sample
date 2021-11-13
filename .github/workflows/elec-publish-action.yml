@@ -31,7 +31,7 @@ jobs:
             dist/*.AppImage
       - name: Download electron-dist content
         uses: actions/download-artifact@v2
-         with:
+        with:
           name: electron-distributable
       - name: Create GitHub release
         id: create-new-release
