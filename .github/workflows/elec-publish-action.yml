@@ -26,6 +26,6 @@ jobs:
       with:
         name: electron-distributable
         path: |
-           dist/**/*.exe
-           dist/**/*.dmg
+           dist/*.exe
+           dist/*.dmg
       
