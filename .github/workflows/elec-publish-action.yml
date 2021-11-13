@@ -38,6 +38,7 @@ jobs:
         with:
           filename: electron-distributable.zip
       - name: Create GitHub release
+        if: ${{ matrix.os == 'windows-latest' }}
         id: create-new-release
         uses: actions/create-release@v1
         env:
