@@ -9,23 +9,45 @@ jobs:
         os: [macos-latest, ubuntu-latest, windows-latest]
 
     steps:
-    - uses: actions/checkout@v2
-      with:
-            persist-credentials: false     
-    - uses: actions/setup-node@master
-      with:
-        node-version: 14
-    - name: install dependencies
-      run: npm install
-    - name: build
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: npm run dist
-    - name: Upload multi-os distribution
-      uses: actions/upload-artifact@v2
-      with:
-        name: electron-distributable
-        path: |
-           dist/*.exe
-           dist/*.dmg
+      - uses: actions/checkout@v2
+        with:
+              persist-credentials: false     
+      - uses: actions/setup-node@master
+        with:
+          node-version: 14
+      - name: install dependencies
+        run: npm install
+      - name: build
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm run dist
+      - name: Upload multi-os distribution
+        uses: actions/upload-artifact@v2
+        with:
+          name: electron-distributable
+          path: |
+            dist/*.exe
+            dist/*.dmg
+            dist/*.AppImage
+      - name: Download electron-dist content
+          uses: actions/download-artifact@v2
+          with:
+            name: electron-distributable
+      - name: Create GitHub release
+          id: create-new-release
+          uses: actions/create-release@v1
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          with:
+            tag_name: v${{ github.run_number }}
+            release_name: Release ${{ github.run_number }}
+      - name: Upload asset to GitHub release
+          uses: actions/upload-release-asset@v1
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          with:
+            upload_url: ${{ steps.create-new-release.outputs.upload_url }}
+            asset_path: ./electron-distributable
+            asset_name: ${{ matrix.os }}-prices-v${{ github.run_number }}
+            asset_content_type: application/octet-stream
       
