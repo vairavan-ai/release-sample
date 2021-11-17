@@ -12,12 +12,20 @@
     "postinstall": "electron-builder install-app-deps",
     "pack": "electron-builder --dir",
     "dist_": "electron-builder",
-    "dist": "$npm_package_config_desk_out"
+    "dist": "run-script-os",
+    "dist:win32": "%npm_package_config_desk_out%",
+    "dist:darwin:linux": "$npm_package_config_desk_out",
+
+    "test": "run-script-os",
+    "test:win32": "echo 'del whatever you want in Windows 32/64'",
+    "test:darwin:linux": "echo 'You can combine OS tags and rm all the things!'",
+    "test:default": "echo 'This will run on any platform that does not have its own script'"
   },
   "license": "ISC",
   "devDependencies": {
     "@dynobytes/fow-typescript-sdk": "^0.6.29",
     "electron": "^3.0.2",
+    "run-script-os": "^1.1.6",
     "electron-builder": "^22.13.1"
   },
   "dependencies": {
