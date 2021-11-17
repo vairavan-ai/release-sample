@@ -4,19 +4,24 @@
   "description": "Prices of commodities",
   "repository": "electron/simple-samples",
   "main": "app.js",
+  "config": {
+    "desk_out": "electron-builder"
+  },
   "scripts": {
     "start": "electron app.js",
     "postinstall": "electron-builder install-app-deps",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder"
+    "dist_": "electron-builder",
+    "dist": "%npm_package_config_desk_out%"
   },
   "license": "ISC",
   "devDependencies": {
-    "electron": "^3.0.2",
     "@dynobytes/fow-typescript-sdk": "^0.6.29",
+    "electron": "^3.0.2",
     "electron-builder": "^22.13.1"
   },
   "dependencies": {
+    "cross-env": "^7.0.3",
     "papaparse": "^4.6.0"
   }
 }
